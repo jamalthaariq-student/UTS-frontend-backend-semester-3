@@ -18,7 +18,6 @@ class UserRepository:
         return new_user
 
     def update(self, user, data):
-        # Hanya memperbarui username, email, dan password (role diabaikan/mutlak Petani)
         if 'username' in data and data['username']:
             user.username = data['username']
         if 'email' in data and data['email']:
