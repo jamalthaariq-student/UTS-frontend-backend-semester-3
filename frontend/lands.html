@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Lahan - TaniKuy</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <span class="brand-icon">🌱</span>
+                <h2>MyTani</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><span class="icon">📊</span> Dashboard</a>
+                <a href="lands.html" class="nav-item active"><span class="icon">🌾</span> Kelola Lahan</a>
+                <a href="plants.html" class="nav-item"><span class="icon">🌿</span> Kelola Tanaman</a>
+            </nav>
+            
+            <div class="sidebar-user" style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div class="user-avatar">👤</div>
+                    <div class="user-info">
+                        <h4 id="sidebar-user-name"></h4>
+                        <p>Petani Moderen</p>
+                    </div>
+                </div>
+                <a href="profile.html" title="Pengaturan Profil" style="font-size: 1.2rem; text-decoration: none;">⚙️</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="topbar">
+                <h1>Kelola Data Lahan Pertanian</h1>
+                <div class="topbar-right">
+                    <span id="realtime-date-badge" class="date-badge">Memuat tanggal...</span>
+                </div>
+            </header>
+
+            <!-- Form Tambah / Edit Lahan -->
+            <section class="content-section" style="margin-bottom: 25px;">
+                <div class="section-header">
+                    <h2 id="form-title">Tambah Lahan Baru</h2>
+                </div>
+                <form id="land-form" novalidate autocomplete="off" class="max-width-form">
+                    <input type="hidden" id="edit-land-id" value="">
+                    
+                    <div class="form-group">
+                        <label for="land-name">Nama Lahan</label>
+                        <input type="text" id="land-name" placeholder="Masukkan nama lahan" autocomplete="off">
+                        <small class="error-text"></small>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label for="soil-type">Jenis Tanah</label>
+                            <select id="soil-type">
+                                <option value="Alluvial">Alluvial / Tanah endapan sungai (subur)</option>
+                                <option value="Latosol">Latosol / Tanah merah (kurang subur)</option>
+                                <option value="Regosol">Regosol / Tanah muda/berpasir (kasar)</option>
+                                <option value="Andosol">Andosol / Tanah vulkanik/gunung berapi (subur)</option>
+                                <option value="Grumosol">Grumosol / Tanah lempung (liat, mengembang)</option>
+                            </select>
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="area-size">Luas Lahan (Hektar)</label>
+                            <input type="number" id="area-size" step="0.1" placeholder="Masukkan luas lahan" autocomplete="off">
+                            <small class="error-text"></small>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label for="land-status">Status Lahan</label>
+                            <select id="land-status">
+                                <option value="Aktif">Aktif</option>
+                                <option value="Butuh Perhatian">Butuh Perhatian</option>
+                            </select>
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Lokasi Lahan</label>
+                            <input type="text" id="location" placeholder="Masukkan lokasi lahan" autocomplete="off">
+                            <small class="error-text"></small>
+                        </div>
+                    </div>
+
+                    <div class="form-actions" style="display: flex; gap: 10px;">
+                        <button type="submit" id="btn-submit-land" class="btn btn-success">Simpan Data Lahan</button>
+                        <button type="button" id="btn-cancel-edit" class="btn btn-outline" style="display: none;">Batal Edit</button>
+                    </div>
+                </form>
+                <div id="form-feedback" class="feedback-msg"></div>
+            </section>
+
+            <!-- Daftar Lahan -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Daftar Lahan Terdaftar</h2>
+                </div>
+                <div id="land-crud-container" class="land-grid">
+                    <!-- Kartu Lahan CRUD akan dirender di sini -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>

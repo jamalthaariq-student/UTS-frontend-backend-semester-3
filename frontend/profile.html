@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan Profil - MyTani</title>
+    <!-- CSS Utama & CSS Khusus Halaman Profil -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/profile.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <span class="brand-icon">🌱</span>
+                <h2>MyTani</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><span class="icon">📊</span> Dashboard</a>
+                <a href="lands.html" class="nav-item"><span class="icon">🌾</span> Kelola Lahan</a>
+                <a href="plants.html" class="nav-item"><span class="icon">🌿</span> Kelola Tanaman</a>
+            </nav>
+
+            <!-- Sidebar User Dinamis -->
+            <div class="sidebar-user">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div class="user-avatar">👤</div>
+                    <div class="user-info">
+                        <h4 id="sidebar-user-name"></h4>
+                        <p>Petani Moderen</p>
+                    </div>
+                </div>
+                <a href="profile.html" title="Pengaturan Profil" style="font-size: 1.2rem; text-decoration: none;">⚙️</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="topbar">
+                <h1>Pengaturan Profil & Akun</h1>
+                <div class="topbar-right">
+                    <span id="realtime-date-badge" class="date-badge">Memuat tanggal...</span>
+                </div>
+            </header>
+
+            <div class="max-width-form">
+                <!-- Card Header Profil Dinamis -->
+                <section class="content-section profile-card-header">
+                    <!-- Display Mode Profil -->
+                    <div id="profile-display-mode" class="profile-header">
+                        <div class="profile-avatar">🧑‍🌾</div>
+                        <div class="profile-meta">
+                            <h2 id="profile-name">Petani MyTani</h2>
+                            <p id="profile-email">user@mytani.id</p>
+                        </div>
+                        <button id="btn-toggle-edit" class="btn btn-outline btn-edit-profile">Edit Profil ✏️</button>
+                    </div>
+
+                    <!-- Form Mode Edit Profil (Disembunyikan secara bawaan) -->
+                    <form id="profile-edit-form" class="profile-edit-form" style="display: none;" novalidate autocomplete="off">
+                        <h3 style="margin-bottom: 15px; color: var(--color-primary-dark); font-size: 1.1rem;">Edit Informasi Profil</h3>
+                        
+                        <div class="form-group">
+                            <label for="edit-username">Nama Lengkap / Username *</label>
+                            <input type="text" id="edit-username" placeholder="Masukkan nama baru" autocomplete="off">
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-user-email">Alamat Email *</label>
+                            <input type="email" id="edit-user-email" placeholder="Masukkan email baru" autocomplete="off">
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div class="form-actions" style="margin-top: 15px;">
+                            <button type="submit" class="btn btn-success">Simpan Perubahan ✨</button>
+                            <button type="button" id="btn-cancel-profile-edit" class="btn btn-outline">Batal</button>
+                        </div>
+                        <div id="profile-form-feedback" class="feedback-msg"></div>
+                    </form>
+                </section>
+
+                <!-- Card Pengaturan -->
+                <section class="content-section">
+                    <div class="settings-section">
+                        <h3>PENGATURAN PROFIL</h3>
+                        
+                        <div class="setting-item">
+                            <div>
+                                <h4>Informasi Akun</h4>
+                                <p id="profile-info-sub">Terhubung dengan email terdaftar</p>
+                            </div>
+                            <span class="setting-chevron">›</span>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>NOTIFIKASI</h3>
+                        
+                        <div class="setting-item">
+                            <div>
+                                <h4>Notifikasi Panen</h4>
+                                <p>Pengingat estimasi waktu panen & jadwal perawatan tanaman</p>
+                            </div>
+                            <input type="checkbox" checked class="setting-checkbox">
+                        </div>
+
+                        <div class="setting-item">
+                            <div>
+                                <h4>Notifikasi Cuaca</h4>
+                                <p>Peringatan potensi cuaca ekstrem & estimasi curah hujan</p>
+                            </div>
+                            <input type="checkbox" checked class="setting-checkbox">
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>AKUN & APLIKASI</h3>
+                        
+                        <div class="setting-item no-border">
+                            <div>
+                                <h4>Bahasa</h4>
+                                <p>Bahasa Indonesia</p>
+                            </div>
+                            <span class="badge badge-lang">ID</span>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Keluar -->
+                    <a href="index.html" class="btn btn-danger btn-block btn-logout">Keluar Akun 🚪</a>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>

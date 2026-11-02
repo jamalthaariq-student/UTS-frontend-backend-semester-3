@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MyTani</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <span class="brand-icon">🌱</span>
+                <h2>MyTani</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active"><span class="icon">📊</span> Dashboard</a>
+                <a href="lands.html" class="nav-item"><span class="icon">🌾</span> Kelola Lahan</a>
+                <a href="plants.html" class="nav-item"><span class="icon">🌿</span> Kelola Tanaman</a>
+            </nav>
+
+            <!-- Sidebar User Dinamis -->
+            <div class="sidebar-user">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div class="user-avatar">👤</div>
+                    <div class="user-info">
+                        <h4 id="sidebar-user-name"></h4>
+                        <p>Petani Moderen</p>
+                    </div>
+                </div>
+                <a href="profile.html" title="Pengaturan Profil" style="font-size: 1.2rem; text-decoration: none;">⚙️</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="topbar">
+                <h1>Dashboard Pertanian</h1>
+                <div class="topbar-right">
+                    <span id="realtime-date-badge" class="date-badge">Memuat tanggal...</span>
+                </div>
+            </header>
+
+            <!-- Banner Kunjungan -->
+            <section id="welcome-banner" class="welcome-banner" style="display: none;">
+                <div>
+                    <h2>Selamat datang kembali, <span id="user-display-name">Petani</span>!</h2>
+                    <p>Pantau kondisi lahan dan tanaman Anda secara real-time.</p>
+                </div>
+            </section>
+
+            <!-- Metrics Ringkasan -->
+            <section class="metrics-grid">
+                <div class="metric-card">
+                    <span class="metric-icon">🌱</span>
+                    <div class="metric-info">
+                        <p class="label">Total Luas Lahan</p>
+                        <h3 id="metric-total-area">0 ha</h3>
+                        <!-- <small class="trend">Dihitung otomatis via HOF reduce</small> -->
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-icon">🌾</span>
+                    <div class="metric-info">
+                        <p class="label">Tanaman Aktif</p>
+                        <h3 id="metric-active-plants">0 Plot</h3>
+                        <!-- <small>Data terdaftar di sistem</small> -->
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-icon">🛡️</span>
+                    <div class="metric-info">
+                        <p class="label">Kesehatan Tanaman</p>
+                        <h3 id="metric-plant-health">0%</h3>
+                        <!-- <small id="metric-health-sub">Kondisi: Belum Ada Data</small> -->
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-icon">📍</span>
+                    <div class="metric-info">
+                        <p class="label">Peta Lahan</p>
+                        <h3 id="metric-locations">0 Lokasi</h3>
+                        <!-- <small id="metric-locations-sub">Tersebar di 0 Wilayah</small> -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEKSI 1: DAFTAR LAHAN (Grid Cards + Search & Filter) -->
+            <section class="content-section" style="margin-bottom: 25px;">
+                <div class="section-header">
+                    <h2>Daftar Lahan Terdaftar</h2>
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                        <input type="text" id="search-land-input" placeholder="Cari nama/lokasi lahan..." style="padding: 6px 12px; border: 1px solid var(--color-border); border-radius: 20px; font-size: 0.85rem; outline: none;">
+                        <div class="filter-buttons">
+                            <button class="btn-filter btn-filter-land active" data-filter="Semua">Semua</button>
+                            <button class="btn-filter btn-filter-land" data-filter="Aktif">Aktif</button>
+                            <button class="btn-filter btn-filter-land" data-filter="Butuh Perhatian">Butuh Perhatian</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="land-card-container" class="cards-grid">
+                    <!-- Card Lahan Read-Only di-render di sini via UI Renderer -->
+                </div>
+            </section>
+
+            <!-- SEKSI 2: DAFTAR TANAMAN (Grid Cards + Search & Filter) -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Daftar Tanaman Terdaftar</h2>
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                        <input type="text" id="search-plant-input" placeholder="Cari nama/kategori tanaman..." style="padding: 6px 12px; border: 1px solid var(--color-border); border-radius: 20px; font-size: 0.85rem; outline: none;">
+                        <div class="filter-buttons">
+                            <button class="btn-filter btn-filter-plant active" data-filter="Semua">Semua</button>
+                            <button class="btn-filter btn-filter-plant" data-filter="Baik">Baik</button>
+                            <button class="btn-filter btn-filter-plant" data-filter="Perlu Pupuk">Perlu Pupuk</button>
+                            <button class="btn-filter btn-filter-plant" data-filter="Terserang Hama">Terserang Hama</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="plant-dashboard-container" class="cards-grid">
+                    <!-- Card Tanaman Read-Only di-render di sini via UI Renderer -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>

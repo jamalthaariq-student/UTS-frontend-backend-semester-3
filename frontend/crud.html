@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Lahan - TaniKuy</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="brand">
+                <span class="brand-icon">🌱</span>
+                <h2>MyTani</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><span class="icon">📊</span> Dashboard</a>
+                <a href="crud.html" class="nav-item active"><span class="icon">🌾</span> CRUD Lahan</a>
+                <a href="profile.html" class="nav-item"><span class="icon">⚙️</span> Pengaturan</a>
+            </nav>
+            <div class="sidebar-user">
+                <div class="user-avatar">👤</div>
+                <div class="user-info">
+                    <h4>Budi Santoso</h4>
+                    <p>Petani Kopi</p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <h1>CRUD Lahan</h1>
+            </header>
+
+            <section class="content-section card-form max-width-form">
+                <h2>Form Tambah Lahan Baru</h2>
+                <p class="subtitle">Isi detail informasi lahan baru yang akan ditambahkan ke dalam sistem.</p>
+
+                <form id="land-form">
+                    <div class="form-group">
+                        <label for="land-name">Nama Lahan *</label>
+                        <input type="text" id="land-name" placeholder="Contoh: Kebun Sawit Desa Maju" required>
+                        <small class="error-text"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="soil-type">Jenis Tanah *</label>
+                        <select id="soil-type" required>
+                            <option value="">Pilih Jenis Tanah</option>
+                            <option value="Alluvial">Alluvial</option>
+                            <option value="Latosol">Latosol</option>
+                            <option value="Regosol">Regosol</option>
+                            <option value="Tanah Humus">Tanah Humus</option>
+                        </select>
+                        <small class="error-text"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="area-size">Luas Lahan (Ha) *</label>
+                        <input type="number" step="0.1" id="area-size" placeholder="Contoh: 2.5" required>
+                        <small class="error-text"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="land-status">Status *</label>
+                        <select id="land-status" required>
+                            <option value="Aktif">Aktif</option>
+                            <option value="Butuh Perhatian">Butuh Perhatian</option>
+                        </select>
+                        <small class="error-text"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Lokasi Lahan *</label>
+                        <input type="text" id="location" placeholder="Contoh: Jl. Raya Pertanian KM 12, Desa Maju" required>
+                        <small class="error-text"></small>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="dashboard.html" class="btn btn-outline">Batal ✕</a>
+                        <button type="submit" class="btn btn-success">Simpan Data 💾</button>
+                    </div>
+                </form>
+
+                <div id="form-feedback" class="feedback-msg"></div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>

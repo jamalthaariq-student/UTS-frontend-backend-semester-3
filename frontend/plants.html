@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Tanaman - TaniKuy</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <span class="brand-icon">🌱</span>
+                <h2>MyTani</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><span class="icon">📊</span> Dashboard</a>
+                <a href="lands.html" class="nav-item"><span class="icon">🌾</span> Kelola Lahan</a>
+                <a href="plants.html" class="nav-item active"><span class="icon">🌿</span> Kelola Tanaman</a>
+            </nav>
+            
+            <div class="sidebar-user" style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div class="user-avatar">👤</div>
+                    <div class="user-info">
+                        <h4 id="sidebar-user-name"></h4>
+                        <p>Petani Moderen</p>
+                    </div>
+                </div>
+                <a href="profile.html" title="Pengaturan Profil" style="font-size: 1.2rem; text-decoration: none;">⚙️</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="topbar">
+                <h1>Kelola Data Tanaman & Plot</h1>
+                <div class="topbar-right">
+                    <span id="realtime-date-badge" class="date-badge">Memuat tanggal...</span>
+                </div>
+            </header>
+
+            <!-- PILIHAN MODE PENAMBAHAN DATA -->
+            <section class="content-section" style="margin-bottom: 25px;">
+                <div class="section-header">
+                    <h2>Pilih Mode Penambahan Data</h2>
+                    <div class="filter-buttons">
+                        <button id="btn-mode-regular" class="btn-filter active">Tambah Tanaman</button>
+                        <button id="btn-mode-atomic" class="btn-filter">Tambah Tanaman + Lahan Baru</button>
+                    </div>
+                </div>
+
+                <!-- MODE 1: FORM REGULAR (Lahan Eksisting) -->
+                <div id="wrapper-regular-form">
+                    <div class="section-header">
+                        <h2 id="plant-form-title">Tambah Tanaman Baru</h2>
+                    </div>
+                    <form id="plant-form" novalidate autocomplete="off" class="max-width-form">
+                        <input type="hidden" id="edit-plant-id" value="">
+                        
+                        <div class="form-group">
+                            <label for="plant-land-id">Pilih Lahan Pertanian (Foreign Key)</label>
+                            <select id="plant-land-id">
+                                <option value="">-- Pilih Lahan --</option>
+                            </select>
+                            <small class="error-text"></small>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="form-group">
+                                <label for="plant-name">Nama Tanaman / Komoditas</label>
+                                <input type="text" id="plant-name" placeholder="Masukkan nama tanaman" autocomplete="off">
+                                <small class="error-text"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="plant-type">Kategori Tanaman</label>
+                                <select id="plant-type">
+                                    <option value="Pangan">Tanaman Pangan</option>
+                                    <option value="Hortikultura">Hortikultura</option>
+                                    <option value="Perkebunan">Perkebunan</option>
+                                </select>
+                                <small class="error-text"></small>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="form-group">
+                                <label for="plant-quantity">Jumlah Plot / Pohon</label>
+                                <input type="number" id="plant-quantity" placeholder="Masukkan jumlah tanaman" autocomplete="off">
+                                <small class="error-text"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="plant-status">Kondisi Pertumbuhan</label>
+                                <select id="plant-status">
+                                    <option value="Baik">Baik & Subur</option>
+                                    <option value="Perlu Pupuk">Perlu Pemupukan</option>
+                                    <option value="Terserang Hama">Terserang Hama</option>
+                                </select>
+                                <small class="error-text"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-actions" style="display: flex; gap: 10px;">
+                            <button type="submit" id="btn-submit-plant" class="btn btn-success">Simpan Data Tanaman </button>
+                            <button type="button" id="btn-cancel-plant-edit" class="btn btn-outline" style="display: none;">Batal Edit</button>
+                        </div>
+                    </form>
+                    <div id="plant-form-feedback" class="feedback-msg"></div>
+                </div>
+
+                <!-- MODE 2: FORM ATOMIK (Lahan Baru + Tanaman Baru Sekaligus) -->
+                <div id="wrapper-atomic-form" style="display: none;">
+                    <div class="section-header">
+                        <h2>Buka Lahan Baru & Tanaman Pertama (Proses Atomik)</h2>
+                    </div>
+                    <form id="atomic-plant-form" novalidate autocomplete="off" class="max-width-form">
+                        
+                        <!-- SUB-SECTION 1: DATA LAHAN BARU -->
+                        <fieldset style="border: 1px solid var(--color-border); border-radius: 8px; padding: 15px; margin-bottom: 20px; background: #FAFCF8;">
+                            <legend style="font-weight: bold; color: var(--color-primary-dark); padding: 0 6px;">1. Detail Informasi Lahan Baru</legend>
+                            
+                            <div class="form-group">
+                                <label for="atomic-land-name">Nama Lahan Baru</label>
+                                <input type="text" id="atomic-land-name" placeholder="Contoh: Kebun Melon Cluring" autocomplete="off">
+                                <small class="error-text"></small>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div class="form-group">
+                                    <label for="atomic-soil-type">Jenis Tanah</label>
+                                    <select id="atomic-soil-type">
+                                        <option value="Andosol">Andosol / Tanah vulkanik/gunung berapi (subur)</option>
+                                        <option value="Regosol">Regosol / Tanah muda/berpasir (kasar)</option>
+                                        <option value="Alluvial">Alluvial / Tanah endapan sungai (subur)</option>
+                                        <option value="Latosol">Latosol / Tanah merah (kurang subur)</option>
+                                        <option value="Grumosol">Grumosol / Tanah lempung (liat, mengembang)</option>
+                                    </select>
+                                    <small class="error-text"></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="atomic-area-size">Luas Lahan (Hektar)</label>
+                                    <input type="number" id="atomic-area-size" step="0.1" placeholder="Masukkan luas lahan" autocomplete="off">
+                                    <small class="error-text"></small>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="atomic-location">Lokasi Lahan</label>
+                                <input type="text" id="atomic-location" placeholder="Masukkan lokasi lahan" autocomplete="off">
+                                <small class="error-text"></small>
+                            </div>
+                        </fieldset>
+
+                        <!-- SUB-SECTION 2: DATA TANAMAN PERTAMA -->
+                        <fieldset style="border: 1px solid var(--color-border); border-radius: 8px; padding: 15px; margin-bottom: 20px; background: #FAFCF8;">
+                            <legend style="font-weight: bold; color: var(--color-primary-dark); padding: 0 6px;">2. Detail Tanaman Pertama</legend>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div class="form-group">
+                                    <label for="atomic-plant-name">Nama Tanaman / Komoditas</label>
+                                    <input type="text" id="atomic-plant-name" placeholder="Masukkan nama tanaman" autocomplete="off">
+                                    <small class="error-text"></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="atomic-plant-type">Kategori Tanaman</label>
+                                    <select id="atomic-plant-type">
+                                        <option value="Hortikultura">Hortikultura</option>
+                                        <option value="Pangan">Tanaman Pangan</option>
+                                        <option value="Perkebunan">Perkebunan</option>
+                                    </select>
+                                    <small class="error-text"></small>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="atomic-plant-quantity">Jumlah Plot / Batang</label>
+                                <input type="number" id="atomic-plant-quantity" placeholder="Masukkan jumlah tanaman" autocomplete="off">
+                                <small class="error-text"></small>
+                            </div>
+                        </fieldset>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success">Simpan Lahan & Tanaman</button>
+                        </div>
+                    </form>
+                    <div id="atomic-form-feedback" class="feedback-msg"></div>
+                </div>
+            </section>
+
+            <!-- Daftar Tanaman Terdaftar -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Daftar Tanaman Terdaftar</h2>
+                </div>
+                <div id="plant-crud-container" class="land-grid">
+                    <!-- Kartu Tanaman CRUD akan dirender di sini -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>

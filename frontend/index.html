@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk - MyTani</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="auth-body">
+    <div class="auth-container">
+        <div class="brand auth-brand">
+            <span class="brand-icon">🌱</span>
+            <h2>MyTani</h2>
+        </div>
+        
+        <!-- <h3>Selamat Datang Kembali!</h3>
+        <p class="subtitle">Masuk untuk mengelola lahan dan tanaman Anda secara real-time.</p> -->
+
+        <form id="login-form" novalidate autocomplete="off">
+            <div class="form-group">
+                <label for="login-email">Alamat Email *</label>
+                <input type="email" id="login-email" placeholder="Masukkan alamat email" autocomplete="off">
+                <small class="error-text"></small>
+            </div>
+
+            <div class="form-group">
+                <label for="login-password">Kata Sandi *</label>
+                <input type="password" id="login-password" placeholder="Masukkan kata sandi" autocomplete="off">
+                <small class="error-text"></small>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-block" style="margin-top: 10px;">Masuk Ke Sistem</button>
+            
+            <!-- WADAH FEEDBACK ERROR LOG IN -->
+            <div id="form-feedback" class="feedback-msg"></div>
+        </form>
+
+        <div class="auth-footer">
+            Belum memiliki akun? <a href="register.html">Daftar Akun Baru</a>
+        </div>
+    </div>
+
+    <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>
